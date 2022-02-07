@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<%- include('../template/header'); %>
+<style>
+    .example-modal .modal {
+      position: relative;
+      top: auto;
+      bottom: auto;
+      right: auto;
+      left: auto;
+      display: block;
+      z-index: 1;
+    }
+
+    .example-modal .modal {
+      background: transparent !important;
+    }
+</style>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <%- include('../template/top_menu'); %>
+            <%- include('../template/left_nav'); %>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1> Dashboard </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                         <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">ATHLETES</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;"><?php echo $total_athletes; ?></h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-male"></i>
+                                </div>
+                                <a href="athletes_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-red">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">BUSINESS</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;"><?php echo $total_business; ?></h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-handshake-o"></i>
+                                </div>
+                                <a href="business_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                           <div class="small-box bg-green">
+                            <div class="inner" style="height: 128px;">
+                                <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">ORDERS</h3>
+                                <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;"><?php echo $total_order; ?></h3>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <a href="all_order" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-yellow">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">BUSINESS OWNER</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;"><?php echo $total_business_owner; ?></h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                                <a href="business_user_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">USER</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">MANAGEMENT</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <a href="<?php echo $base_url; ?>consumer_user_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-xs-6">
+                          
+                            <div class="small-box bg-red">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">PAYMENT</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">MANAGEMENT</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-credit-card"></i>
+                                </div>
+                                <a href="" class="small-box-footer" data-toggle="modal" data-target="#modal-info" >More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                           
+                            <div class="small-box bg-green">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">NOTIFICATION</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">MANAGEMENT</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-bell"></i>
+                                </div>
+                                <a href="<?php echo $base_url; ?>notification_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                      
+                        <div class="col-lg-3 col-xs-6">
+                            
+                            <div class="small-box bg-yellow">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">SEARCH</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">MANAGEMENT</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                                <a href="<?php echo $base_url; ?>search_management" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        
+                    </div> -->
+                    <!-- /.row -->
+
+                    <!-- Small boxes (Stat box) -->
+                    <!-- <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner" style="height: 128px;">
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">BANNER</h3>
+                                    <h3 style="font-size: 20px;font-weight: bold;margin: 0 0 10px 0;white-space: nowrap;padding: 0;">MANAGEMENT</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-picture-o"></i>
+                                </div>
+                                <a href="<?php echo $base_url; ?>banner" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        
+                    </div> -->
+                    <!-- /.row -->
+
+                    <!-- <div class="modal modal-info fade" id="modal-default">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="width: 384px !important;">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">CATEGORIES MANAGEMENT</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><a href="<?php echo $base_url; ?>categories_management" class="small-box-footer" style="color: #f6f6f6;">MAIN CATEGORIES <i class="fa fa-arrow-circle-right"></i></a></p>
+                                    <p><a href="<?php echo $base_url; ?>categories_management/subcategories" class="small-box-footer" style="color: #f6f6f6;">SUB CATEGORIES <i class="fa fa-arrow-circle-right"></i></a></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                      
+                    </div> -->
+                    <!-- /.modal -->
+
+                    <!-- <div class="modal modal-info fade" id="modal-info">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="width: 384px !important;">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">PAYMENT MANAGEMENT</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p><a href="<?php echo $base_url; ?>payment_management" class="small-box-footer" style="color: #f6f6f6;">USER PAYMENT MANAGEMENT <i class="fa fa-arrow-circle-right"></i></a></p>
+                                    <p><a href="<?php echo $base_url; ?>payment_management/seller_payment_list" class="small-box-footer" style="color: #f6f6f6;">SELLER PAYMENT MANAGEMENT <i class="fa fa-arrow-circle-right"></i></a></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div> -->
+                    <!-- /.modal -->
+                </section>
+                <!-- /.content -->
+            </div>
+            
+        </div>
+        <!-- ./wrapper -->
+        <%- include('../template/footer'); %>
+    </body>
+</html>

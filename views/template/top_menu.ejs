@@ -1,0 +1,178 @@
+<!-- BEGIN HEADER -->
+<header class="main-header">
+    <!-- Logo -->
+    <a href="javascript:void(0)" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg">
+            <h4>CASE</h4>
+            <p>&nbsp;-&nbsp;Admin</p>
+        </span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                <li class="dropdown messages-menu">
+                    <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="label label-success">0</span>
+                    </a> -->
+                    <ul class="dropdown-menu">
+                        <li class="header">You have 0 messages</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <!--<ul class="menu">
+                                <li>
+                                     start message
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="<?php echo $base_url; ?>assets/dist/img/user2-160x160.jpg"
+                                                class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            Support Team
+                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                end message -->
+                            <!-- <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="<?php echo $base_url; ?>assets/dist/img/user3-128x128.jpg"
+                                                class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            AdminLTE Design Team
+                                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="<?php echo $base_url; ?>assets/dist/img/user4-128x128.jpg"
+                                                class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            Developers
+                                            <small><i class="fa fa-clock-o"></i> Today</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="<?php echo $base_url; ?>assets/dist/img/user3-128x128.jpg"
+                                                class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            Sales Department
+                                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="<?php echo $base_url; ?>assets/dist/img/user4-128x128.jpg"
+                                                class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            Reviewers
+                                            <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                            </ul>-->
+                        </li>
+                        <li class="footer"><a href="#">See All Messages</a></li>
+                    </ul>
+                </li>
+                <!-- Notifications: style can be found in dropdown.less -->
+                <li class="dropdown notifications-menu">
+                    <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning" id="icon_total_notification_count"><?php echo max($admin_details['total_notification_count'],0);?></span>
+                    </a> -->
+                    <ul class="dropdown-menu">
+                        <li class="header">You have <span id="total_notification_count"></span> notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+               
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu" style="background: #2b2b2b;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/assets/uploads/admin_profile_image/dummy.jpg"
+                            class="user-image" alt="User Image"/>
+                        <span class="hidden-xs">Hi, Admin</p></span>
+                    </a>
+                
+                    <ul class="dropdown-menu" style="background: #2b2b2b;">
+                        <!-- User image -->
+                        <li class="user-header" style="height:103px;background-color:#2b2b2b;color:#ffffff">
+                            <img src="/assets/uploads/admin_profile_image/dummy.jpg" class="user-image" alt="User Image" />
+                            <p>Admin</p>
+                            
+                                <small>Member since 2022</small>
+                                
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="dashboard/change_password/"
+                                    class="btn btn-default btn-flat">Change Password</a>
+                            </div>
+                            <div class="pull-right">
+                                <a onclick="return confirm('Are you sure ?');"
+                                    href="dashboard/logout"
+                                    class="btn btn-default btn-flat confirmBox">Sign Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- END HEADER -->
+<style>
+    .skin-blue .main-header .navbar {
+    background-color: #2b2b2b !important;
+}
+.skin-blue .main-header .logo{
+    background-color: #2b2b2b !important;
+}
+.skin-blue .sidebar-menu>li.header {
+    color: #dfe0e0;
+    background: #656262;
+}
+.skin-blue .sidebar-menu>li.active>a {
+    border-left-color: #656262 !important;
+    background-color: #131315 !important;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    color: #fff;
+    background: #131315 !important;
+}
+</style>

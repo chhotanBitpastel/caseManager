@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+        <form action="/posts" method="POST" autocomplete="off" enctype="multipart/form-data">
+            
+                <div class="form-group">
+                   <label>Title</label>
+                   <input type="text" class="form-control" name="title" placeholder="Title">
+                   
+                </div>
+                <div class="form-group">
+                   <label>Description</label>
+                   <input type="text" class="form-control" name="content" placeholder="Description">
+                   
+                </div>
+                <div class="form-group">
+                <label>Link</label>
+                <input type="text" class="form-control" name="link" placeholder="Link">
+                
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" class="form-control" name="file">    
+                </div>     
+                
+                <div class="form-group">
+                     <button type="submit" class="btn btn-info"><i class="fa fa-database"></i>Submit</button>
+                     <a class="btn btn-secondary" href="/posts"><i class="fa fa-list-alt"></i>View All</a>
+                </div>
+            </form>
+</main>
+
+<footer>
+  
+</footer>
+
+</body>
+</html>

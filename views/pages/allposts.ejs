@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<%- include('../template/header'); %>
+<!-- DataTables -->
+<link rel="stylesheet"
+    href="/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<style>
+.tab {
+    margin-bottom: 25px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 15px 112px !important; 
+    transition: 0.3s;
+    font-size: 13px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <%- include('../template/top_menu'); %>
+        <%- include('../template/left_nav'); %>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>Post Manahement</h1>
+                <ol class="breadcrumb">
+                    <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">All Post</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h3 class="box-title">All Post</h3>
+                                    </div>
+                                    <div class="col-md-3 pull-right">
+                                        <a
+                                            href="/posts/addpost"
+                                            class="btn pull-right " style="background-color: #463077;color: white;">Add Post</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                
+                                <table id="example2" class="table table-bordered table-striped" style="margin-top: 25px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Link</th>
+                                            <th>Image</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% allposts.forEach(function(post) { %>
+                                            <tr>
+                                              <td><%= post._id %></td>
+                                              <td><%= post.title %> </td>
+                                              <td><%= post.content %></td>
+                                              <td><%= post.link %></td>
+                                              <td><% if(post.image){ %>
+                                                <img src="./uploads/<%= post.image %>" width="100" alt="Page image">
+                                             <% } %></td>
+                                            </tr>
+                                  
+                                            <% }); %>
+                                    </tbody> 
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+
+        </div>
+        
+    </div>
+    <!-- ./wrapper -->
+    <%- include('../template/footer'); %>
+
+    <!-- DataTables -->
+    <script src="/assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+    </script>
+
+    <script>
+    $(function() {
+        
+        $('#example2').DataTable()
+
+    });
+    </script>
+
+</body>
+
+</html>
