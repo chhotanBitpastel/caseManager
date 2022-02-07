@@ -6,6 +6,8 @@ const multer  = require('multer');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
+const port = process.env.PORT || 3001;
+
 
 app.use(express.static(__dirname + '/public'));
 
@@ -34,6 +36,6 @@ app.get("/dashboard", async (req, res) => {
 
 
 
-app.listen(3001, function(){
-    console.log(`server is running on port 3001`);
+app.listen(port, function(){
+    console.log(`server is running on port ${port}`);
 })
