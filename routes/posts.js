@@ -5,15 +5,27 @@ const path = require('path');
 
 const Post = mongoose.model("Post");
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/uploads/')
+      cb(null, path.join(__dirname,'../public/uploads'))
     },
     filename: function (req, file, cb) {
-      //cb(null, file.originalname)
-      cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+        //cb(null, file.originalname)
+        cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
     }
-})
+  })
+
+//var storage = multer.diskStorage({
+   // destination: function (req, file, cb) {
+      //cb(null, './public/uploads/')
+
+   // },
+   // filename: function (req, file, cb) {
+      //cb(null, file.originalname)
+    //  cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+    //}
+//})
+
 var upload = multer({ storage: storage }).single('file');
 
 //fetch all data
@@ -52,22 +64,25 @@ router.post("/", upload, async (req, res) => {
 //fetch one record
 router.get("/:postId", async (req, res) => {
     try {
-        const post = await Post.findOne({_id: req.params.postId})
-        res.send(post)
+        const singlepost = await Post.findOne({_id: req.params.postId})
+        res.render("pages/postedit", {singlepost:singlepost})
     } catch (error) {
         res.status(500);
     }
 });
 
-router.put("/:postId", async (req, res) => {
+router.post("/edit/", async (req, res) => {
    try {
+    var post_id=req.body.id;
+
        const post = await Post.findByIdAndUpdate({
-           _id: req.params.postId
+           _id: post_id
        }, req.body,{
         new: true,
         runValidators: true
        });
-       res.send(post)
+       const posts = await Post.find({})
+       res.render("pages/allposts", {allposts:posts});
    } catch (error) {
       res.status(500); 
    }

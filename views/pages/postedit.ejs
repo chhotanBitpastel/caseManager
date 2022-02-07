@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+ <%- include('../template/header'); %>
+<style>
+/* Styling the .validate error message. */
+label.error {
+    color: red;
+    /* color: #a94442; */
+    /* background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 1px 20px 1px 20px; */
+}
+
+.banner_success p {
+    background-color: #00a65a !important;
+    font-size: 14px;
+    padding: 6px 0;
+}
+
+.banner_success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: unset !important;
+}
+</style>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <%- include('../template/top_menu'); %>
+        <%- include('../template/left_nav'); %>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>Post management</h1>
+                <ol class="breadcrumb">
+                    <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Post Management</li>
+                </ol>
+               
+            </section>
+
+
+            <!-- Main content -->
+            <section class="content" style="margin-top:20px;">
+                <!-- Default box -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Edit Post</h3>
+                    </div>
+                    <!-- form start -->
+                    <form class="form-horizontal" action="/posts/edit/"  method="post"  enctype="multipart/form-data">
+                        <div class="box-body">
+                            <input type="hidden" name="id" value="<%= singlepost._id %>">
+                            <div class="form-group">
+                                <label for="category_name" class="col-sm-2 control-label">Title: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" placeholder="Enter Title" value="<%= singlepost.title %>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Description : </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="content" placeholder="Enter Description" value="<%= singlepost.content %>" required>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="category_name" class="col-sm-2 control-label">Link: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="link"
+                                        placeholder="Enter Link" value="<%= singlepost.link %>" required>      
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name" class="col-sm-2 control-label">Image: </label>
+                                <div class="col-sm-6">
+                                    <input type="file" class="form-control" name="file">
+                                             
+                                </div>
+                                <div class="col-sm-4">
+                                    <% if(singlepost.image){ %>
+                                    <img src="/uploads/<%= singlepost.image %>" alt="main_image" width="200">
+                                    <% } %>         
+                                </div>
+                            </div>
+                    
+
+                       
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn  pull-right" name="submit" id="submit"
+                                value="submit" style="background-color: #463077;color: white; outline:none;">UPDATE</button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+
+                </div>
+                <!-- /.box -->
+            </section>
+            <!-- /.content -->
+
+        </div>
+       
+    </div>
+    <!-- ./wrapper -->
+    <%- include('../template/footer'); %>
+</body>
+
+</html>

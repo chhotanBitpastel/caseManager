@@ -101,6 +101,27 @@
                                               <td><% if(post.image){ %>
                                                 <img src="./uploads/<%= post.image %>" width="100" alt="Page image">
                                              <% } %></td>
+                                             <td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn" style="background-color: #463077;color: white;outline:none;">Action</button>
+                                                        <button type="button" class="btn dropdown-toggle" style="background-color: #463077;color: white;"
+                                                            data-toggle="dropdown">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a
+                                                                    href="/posts/<%= post._id %>">Edit</a>
+                                                            </li>
+                                                            <li><a class="confirmBox"
+                                                                    onclick="return confirm('Are you sure you want to delete?');"
+                                                                    href="price_management/remove/">Delete</a>
+                                                            </li>
+    
+                                                        </ul>
+                                                    </div>
+                                             </td>
                                             </tr>
                                   
                                             <% }); %>
