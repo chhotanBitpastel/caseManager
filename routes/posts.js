@@ -51,7 +51,9 @@ router.post("/", upload, async (req, res) => {
         post.title = req.body.title;
         post.content = req.body.content;
         post.link = req.body.link;
-        post.image = req.file.filename;
+        //post.image = req.file.filename;
+        post.image = req.file.path;
+        //console.log(req.file);
         await post.save();
         const posts = await Post.find({})
         res.render("pages/allposts", {allposts:posts});
