@@ -73,32 +73,53 @@ router.get("/:postId", async (req, res) => {
     }
 });
 
-router.post("/edit/", async (req, res) => {
-   try {
-    var post_id=req.body.id;
-
-       const post = await Post.findByIdAndUpdate({
-           _id: post_id
-       }, req.body,{
-        new: true,
-        runValidators: true
-       });
-       const posts = await Post.find({})
-       res.render("pages/allposts", {allposts:posts});
-   } catch (error) {
-      res.status(500); 
-   }
-});
-
-router.delete("/:postId", async (req, res) => {
-    try {
-        const post = await Post.findByIdAndRemove({
-            _id: req.params.postId
-        });
-        res.send(post)
-    } catch (error) {
-        res.status(500); 
+router.post("/edit/", upload, function(req, res){
+   
+    if(req.file){
+    var filename=req.file.filename;
+    }else{
+     var filename=req.body.oldfile;
     }
-})
+    Post.findByIdAndUpdate(req.body.id, {
+        title : req.body.title,
+        content : req.body.content,
+        link : req.body.link,
+        image : filename,
+    }, function(err){
+       if(err){
+        res.redirect('/posts/'+req.body.id)
+       }else{
+       res.redirect('/posts/')
+       
+       }
+    });  
+    
+});
+// update.exec(function(err, data){
+//     if(err) throw err;
+
+// })
+
+router.get("/delete/:postId", async (req, res) => {
+        try {
+            const post = await Post.findByIdAndRemove({
+                _id: req.params.postId
+            });
+            res.redirect('/posts')
+        } catch (error) {
+            res.status(500); 
+        }
+    });
+
+// router.delete("/:postId", async (req, res) => {
+//     try {
+//         const post = await Post.findByIdAndRemove({
+//             _id: req.params.postId
+//         });
+//         res.send(post)
+//     } catch (error) {
+//         res.status(500); 
+//     }
+// })
 
 module.exports = router;
