@@ -89,7 +89,7 @@ router.post("/edit/", upload, function(req, res){
        if(err){
         res.redirect('/posts/'+req.body.id)
        }else{
-       res.redirect('/posts/')
+       res.redirect('/posts')
        
        }
     });  
