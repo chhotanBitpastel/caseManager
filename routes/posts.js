@@ -9,7 +9,7 @@ const Post = mongoose.model("Post");
 //exports.newFileUpload =  function(req , res , next){  
 var storage = sftpStorage({
     sftp: {
-      host: 'https://bitpastel.io/',
+      host: 'https://bitpastel.io',
       port: 22,
       username: 'chhotan@bitpastel.io',
       password: '@!M&1]JKBF#@'
