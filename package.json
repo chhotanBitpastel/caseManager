@@ -19,7 +19,10 @@
     "mongoose": "^6.1.10",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
+    "multer-sftp": "^1.1.1",
     "nodemon": "^2.0.15",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "queue": "^6.0.2",
+    "ssh2-sftp-client": "^7.2.2"
   }
 }

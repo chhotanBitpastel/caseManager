@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 const express = require("express");
 const app = express();
-const multer  = require('multer');
+//const multer  = require('multer');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+var sftpStorage = require('multer-sftp')
 
 const port = process.env.PORT || 3001;
 

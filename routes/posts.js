@@ -2,18 +2,60 @@ const router = require("express").Router();
 const mongoose = require('mongoose');
 const multer  = require('multer');
 const path = require('path');
+var sftpStorage = require('multer-sftp')
 
 const Post = mongoose.model("Post");
 
-let storage = multer.diskStorage({
+//exports.newFileUpload =  function(req , res , next){  
+var storage = sftpStorage({
+    sftp: {
+      host: 'https://bitpastel.io/',
+      port: 22,
+      username: 'chhotan@bitpastel.io',
+      password: '@!M&1]JKBF#@'
+    },
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,'../public/uploads'))
+      cb(null, '/mi/chhotan/images/')
     },
     filename: function (req, file, cb) {
-        //cb(null, file.originalname)
-        cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+      cb(null, file.fieldname + '-' + Date.now())
     }
   })
+//   upload(req,res,function(err){
+//     logger.debug(JSON.stringify(req.body));
+//           logger.debug(JSON.stringify(req.files));
+//       if(err){
+//            logger.debug("Error Occured", JSON.stringify(err));
+//            res.json({error_code:1,err_desc:err});
+//       } else{
+//            logger.debug("Files uploaded successfully");
+//           res.json({error_code:0,err_desc:null});
+//       }
+//   });
+//}
+
+// let storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, path.join(__dirname,'../public/uploads'))
+//     },
+//     filename: function (req, file, cb) {
+//         //cb(null, file.originalname)
+//         cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+//     }
+//   })
+
+//   let storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, '../../../../../http://bitpastel.io/mi/chhotan/images/')
+  
+//      },
+//     filename: function (req, file, cb) {
+//         //cb(null, file.originalname)
+//         cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+//     }
+//   })
+
+  
 
 //var storage = multer.diskStorage({
    // destination: function (req, file, cb) {
@@ -26,7 +68,8 @@ let storage = multer.diskStorage({
     //}
 //})
 
-var upload = multer({ storage: storage }).single('file');
+//var upload = multer({ storage: storage }).single('file');
+var upload = multer({ storage: storage }).array('file');
 
 //fetch all data
 router.get("/", async (req, res) => {
