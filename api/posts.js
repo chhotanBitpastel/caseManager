@@ -13,6 +13,7 @@ router.get("/all-posts", async (req, res) => {
     }
 });
 
+
 router.post("/add-post", async (req, res) => {
     try {
    const post = new Post();
