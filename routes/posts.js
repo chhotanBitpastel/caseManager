@@ -9,13 +9,13 @@ const Post = mongoose.model("Post");
 //exports.newFileUpload =  function(req , res , next){  
 var storage = sftpStorage({
     sftp: {
-      host: 'https://bitpastel.io',
+      host: '208.109.73.6',
       port: 22,
-      username: 'chhotan@bitpastel.io',
-      password: '@!M&1]JKBF#@'
+      username: 'ktewe1al45z5',
+      password: '9xfY]0Qw'
     },
     destination: function (req, file, cb) {
-      cb(null, '/mi/chhotan/images/')
+      cb(null, '/var/www/public_html/mi/chhotan/images/')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now())
@@ -69,7 +69,16 @@ var storage = sftpStorage({
 //})
 
 //var upload = multer({ storage: storage }).single('file');
-var upload = multer({ storage: storage }).array('file');
+const upload = multer({
+    storage: storage,
+    limits: {
+        fieldSize: 8 * 1000000, // 8 MB in bytes
+    },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/gif') cb(new Error("IMG_EXT_UNSUPPORTED"), false);
+        else cb(null, true);
+    },
+});
 
 //fetch all data
 router.get("/", async (req, res) => {
@@ -88,7 +97,7 @@ router.get("/addpost", async (req, res) => {
 });
 
 //Add data
-router.post("/", upload, async (req, res) => {
+router.post("/", upload.single('file'), async (req, res) => {
     try {
         const post = new Post();
         post.title = req.body.title;
@@ -96,14 +105,15 @@ router.post("/", upload, async (req, res) => {
         post.link = req.body.link;
         post.image = req.file.filename;
         //post.image = req.file.path;
-        //console.log(req.file);
-        await post.save();
-        const posts = await Post.find({})
-        res.render("pages/allposts", {allposts:posts});
+        console.log(req.file);
+        //await post.save();
+        res.send(req.body);
+        //const posts = await Post.find({})
+        //res.render("pages/allposts", {allposts:posts});
     } catch (error) {
         res.status(500);
     }
-    res.send(req.body);
+    //res.send(req.body);
 });
 
 //fetch one record
@@ -116,7 +126,7 @@ router.get("/:postId", async (req, res) => {
     }
 });
 
-router.post("/edit/", upload, function(req, res){
+router.post("/edit/", upload.single('file'), function(req, res){
    
     if(req.file){
     var filename=req.file.filename;
