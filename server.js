@@ -9,25 +9,6 @@ const morgan = require("morgan");
 var sftpStorage = require('multer-sftp');
 const app = express();
 
-var postapi= require('./api/posts');
-//mobile api route
-app.use('/api', postapi);
-
-const corsOpts = {
-  origin: '*',
-
-  methods: [
-    'GET',
-    'POST',
-  ],
-
-  allowedHeaders: [
-    'Content-Type',
-  ],
-};
-
-app.use(cors(corsOpts));
-
 const port = process.env.PORT || 3001;
 
 //app.use(cors()); 
@@ -41,10 +22,30 @@ require("./mongo");
 //Models
 require("./model/Post");
 
+app.use(bodyParser.urlencoded({extended: false}))
 //Middleware
 app.use(bodyParser.json())
    .use(morgan());
 
+   const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+  app.use(cors(corsOpts));
+
+
+  var postapi= require('./api/posts');
+  //mobile api route
+  app.use('/api', postapi);
 app.use("/posts", require("./routes/posts"))
 
 app.get("/", async (req, res) => {
