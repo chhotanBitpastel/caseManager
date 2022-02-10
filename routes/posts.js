@@ -15,7 +15,7 @@ var storage = sftpStorage({
       password: '9xfY]0Qw'
     },
     destination: function (req, file, cb) {
-      cb(null, '/var/www/public_html/mi/chhotan/images/')
+      cb(null, '/public_html/mi/chhotan/images/')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now())
@@ -105,11 +105,10 @@ router.post("/", upload.single('file'), async (req, res) => {
         post.link = req.body.link;
         post.image = req.file.filename;
         //post.image = req.file.path;
-        console.log(req.file);
-        //await post.save();
-        res.send(req.body);
-        //const posts = await Post.find({})
-        //res.render("pages/allposts", {allposts:posts});
+       // console.log(req.file);
+        await post.save();
+       // res.send(req.body);
+        res.redirect('/posts')
     } catch (error) {
         res.status(500);
     }

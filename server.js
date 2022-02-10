@@ -42,15 +42,15 @@ app.use(bodyParser.json())
   
   app.use(cors(corsOpts));
 
+//mobile api route
+app.use('/api', require('./api/posts'));
 
-  var postapi= require('./api/posts');
-  //mobile api route
-  app.use('/api', postapi);
+//web routs
 app.use("/posts", require("./routes/posts"))
-
-app.get("/", async (req, res) => {
-  res.render('pages/login');
-});
+app.use("/", require("./routes/index"))
+// app.get("/", async (req, res) => {
+//   res.render('pages/login');
+// });
 app.get("/dashboard", async (req, res) => {
   res.render('pages/dashboard');
 });

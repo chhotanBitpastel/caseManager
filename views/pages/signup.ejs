@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Case manager | Admin Log in</title>
+    <title>Case manager | Admin Signup</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -81,7 +81,10 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-          
+          <% if(msg != ''){ %>
+
+          <p style="text-align: center"><%= msg %></p>
+          <% } %>
 
             <div class="head_logo text-center">
                 <h2>CASE MANAGER</h2>
@@ -91,13 +94,21 @@
          <!-- </div> -->
             </div>
            
-            <form action="/" method="post">
+            <form action="/signup" method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" required="" placeholder="Username" name="username">
+                        <input type="text" class="form-control" required="" placeholder="fullname" name="fullname">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                <div class="form-group has-feedback">
+                    <input type="email" class="form-control" required="" placeholder="email" name="email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" required="" placeholder="Password" name="password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" required="" placeholder="Confirm Password" name="cpassword">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
@@ -105,7 +116,7 @@
                     <!-- /.col -->
                     <div class="col-xs-12 submit-btn-holder">
                         <button type="submit" class="btn-block submit-btn-style" style="background: #2b2b2b;" name="submit"
-                            value="login">Sign In</button>
+                            value="signup">Signup</button>
                     </div>
                     <!-- /.col -->
                 </div>
