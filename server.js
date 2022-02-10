@@ -8,7 +8,7 @@ const morgan = require("morgan");
 var sftpStorage = require('multer-sftp');
 
 var postapi= require('./api/posts');
-
+//mobile api route
 app.use('/api', postapi);
 
 const port = process.env.PORT || 3001;
