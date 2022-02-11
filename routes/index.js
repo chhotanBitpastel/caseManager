@@ -62,7 +62,7 @@ router.get('/', function(req, res, next) {
     }
   });
   
-  router.post('/signup',function(req, res, next) {
+  router.post('/signup', checkEmail, function(req, res, next) {
     var fullname=req.body.fullname;
     var email=req.body.email;
     var password=req.body.password;
@@ -78,10 +78,7 @@ router.get('/', function(req, res, next) {
  userDetails.save((err,doc)=>{
     if(err) throw err;
     res.render('pages/signup', { msg:'User Registerd Successfully' });
-    
  });
-
-
 });
 
 

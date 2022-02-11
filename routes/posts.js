@@ -7,20 +7,20 @@ var sftpStorage = require('multer-sftp')
 const Post = mongoose.model("Post");
 
 //exports.newFileUpload =  function(req , res , next){  
-var storage = sftpStorage({
-    sftp: {
-      host: '208.109.73.6',
-      port: 22,
-      username: 'ktewe1al45z5',
-      password: '9xfY]0Qw'
-    },
-    destination: function (req, file, cb) {
-      cb(null, '/public_html/mi/chhotan/images/')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
-  })
+// var storage = sftpStorage({
+//     sftp: {
+//       host: '208.109.73.6',
+//       port: 22,
+//       username: 'ktewe1al45z5',
+//       password: '9xfY]0Qw'
+//     },
+//     destination: function (req, file, cb) {
+//       cb(null, '/public_html/mi/chhotan/images/')
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, file.fieldname + '-' + Date.now())
+//     }
+ // })
 //   upload(req,res,function(err){
 //     logger.debug(JSON.stringify(req.body));
 //           logger.debug(JSON.stringify(req.files));
@@ -34,15 +34,15 @@ var storage = sftpStorage({
 //   });
 //}
 
-// let storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, path.join(__dirname,'../public/uploads'))
-//     },
-//     filename: function (req, file, cb) {
-//         //cb(null, file.originalname)
-//         cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
-//     }
-//   })
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname,'../public/uploads'))
+    },
+    filename: function (req, file, cb) {
+        //cb(null, file.originalname)
+        cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname))
+    }
+  })
 
 //   let storage = multer.diskStorage({
 //     destination: function (req, file, cb) {
@@ -75,7 +75,7 @@ const upload = multer({
         fieldSize: 8 * 1000000, // 8 MB in bytes
     },
     fileFilter: (req, file, cb) => {
-        if (file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/gif') cb(new Error("IMG_EXT_UNSUPPORTED"), false);
+        if (file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png' && file.mimetype !== 'image/gif' && file.mimetype !== 'image/webp') cb(new Error("IMG_EXT_UNSUPPORTED"), false);
         else cb(null, true);
     },
 });
