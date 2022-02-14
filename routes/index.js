@@ -1,7 +1,26 @@
 const router = require("express").Router();
-//const mongoose = require('mongoose');
-//const path = require('path');
 var userModule=require('../model/admin');
+var bcrypt =require('bcryptjs');
+var jwt = require('jsonwebtoken');
+
+function checkLoginUser(req,res,next){
+    var userToken=localStorage.getItem('userToken');
+    try {
+      if(req.session.userName){
+      var decoded = jwt.verify(userToken, 'loginToken');//check loginToken exist into userToken
+      }else{
+        res.redirect('/');
+      }
+    } catch(err) {
+      res.redirect('/');
+    }
+    next();
+  }
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
 
 function checkEmail(req,res,next){
     var email=req.body.email;
@@ -19,17 +38,16 @@ function checkEmail(req,res,next){
 
 router.get('/', function(req, res, next) {
     //var loginUser=localStorage.getItem('loginUser');
-    var loginUser=false;
-    if(loginUser){
+    if(req.session.userName){
       res.redirect('/dashboard');
     }else{
     res.render('pages/login', { msg:'' });
     }
   });
   router.post('/', function(req, res, next) {
-    var username=req.body.uname;
+    var email=req.body.username;
     var password=req.body.password;
-    var checkUser=userModule.findOne({username:username});
+    var checkUser=userModule.findOne({email:email});
     checkUser.exec((err, data)=>{
      if(data==null){
       res.render('pages/login', { msg:"Invalid Username and Password." });
@@ -37,14 +55,17 @@ router.get('/', function(req, res, next) {
      }else{
   if(err) throw err;
   var getUserID=data._id;
+  var getFullname=data.fullname;
   var getPassword=data.password;
   if(bcrypt.compareSync(password,getPassword)){
-    var token = jwt.sign({ userID: getUserID }, 'loginToken');
-    localStorage.setItem('userToken', token);
-    localStorage.setItem('loginUser', username);
+    var token = jwt.sign({ userID: getUserID }, 'loginToken');//generate token
+    localStorage.setItem('userToken', token); //store token
+    //localStorage.setItem('loginUser', getFullname); // and store fullname also
+    req.session.userName=getFullname;
+
     res.redirect('/dashboard');
   }else{
-    res.render('index', { title: 'Password Management System', msg:"Invalid Username and Password." });
+    res.render('pages/login', { msg:"Invalid Username and Password." });
   
   }
      }
@@ -54,8 +75,7 @@ router.get('/', function(req, res, next) {
 
   router.get('/signup', function(req, res, next) {
     //var loginUser=localStorage.getItem('loginUser');
-    var loginUser=false;
-    if(loginUser){
+    if(loginUsreq.session.userNameer){
       res.redirect('/dashboard');
     }else{
     res.render('pages/signup', { msg:'' });
@@ -67,8 +87,11 @@ router.get('/', function(req, res, next) {
     var email=req.body.email;
     var password=req.body.password;
     var cpassword=req.body.cpassword;
-
-//password =bcrypt.hashSync(req.body.password,10);
+    if(password != cpassword){
+        res.render('pages/signup', { msg:'Password not matched!' });
+       
+      }else{
+     password =bcrypt.hashSync(req.body.password,10);
 
     var userDetails=new userModule({
         fullname:fullname,
@@ -79,12 +102,23 @@ router.get('/', function(req, res, next) {
     if(err) throw err;
     res.render('pages/signup', { msg:'User Registerd Successfully' });
  });
+}
+
 });
 
 
+router.get("/dashboard", checkLoginUser, (req, res, next) => {
+    var loginUser= req.session.userName;
+    res.render('pages/dashboard', {loginUser:loginUser});
+  });
+  
+
   router.get('/logout', function(req, res, next) {
-  localStorage.removeItem('userToken');
-  localStorage.removeItem('loginUser');
+  req.session.destroy(function(err){
+    if(err){
+      res.redirect('/');
+    }
+  })
   res.redirect('/');
 });
 module.exports = router;

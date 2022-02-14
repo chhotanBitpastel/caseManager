@@ -6,6 +6,27 @@ var sftpStorage = require('multer-sftp')
 
 const Post = mongoose.model("Post");
 
+var jwt = require('jsonwebtoken');
+
+function checkLoginUser(req,res,next){
+    var userToken=localStorage.getItem('userToken');
+    try {
+      if(req.session.userName){
+      var decoded = jwt.verify(userToken, 'loginToken');//check loginToken exist into userToken
+      }else{
+        res.redirect('/');
+      }
+    } catch(err) {
+      res.redirect('/');
+    }
+    next();
+  }
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
+
 //exports.newFileUpload =  function(req , res , next){  
 // var storage = sftpStorage({
 //     sftp: {
@@ -81,7 +102,7 @@ const upload = multer({
 });
 
 //fetch all data
-router.get("/", async (req, res) => {
+router.get("/", checkLoginUser, async (req, res) => {
     try{
         const posts = await Post.find({})
         //res.send(posts);

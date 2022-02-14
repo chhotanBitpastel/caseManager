@@ -7,6 +7,7 @@ const multer  = require('multer');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 var sftpStorage = require('multer-sftp');
+var session = require('express-session');
 const app = express();
 
 const port = process.env.PORT || 3001;
@@ -42,6 +43,11 @@ app.use(bodyParser.json())
   
   app.use(cors(corsOpts));
 
+app.use(session({
+  secret: 'rwqrqqwrwq',
+  resave: false,
+  saveUninitialized: true,
+}));  
 //mobile api route
 app.use('/api', require('./api/posts'));
 
@@ -51,9 +57,6 @@ app.use("/", require("./routes/index"))
 // app.get("/", async (req, res) => {
 //   res.render('pages/login');
 // });
-app.get("/dashboard", async (req, res) => {
-  res.render('pages/dashboard');
-});
 
 
 
