@@ -54,9 +54,9 @@ app.use('/api', require('./api/posts'));
 //web routs
 app.use("/posts", require("./routes/posts"))
 app.use("/", require("./routes/index"))
-// app.get("/", async (req, res) => {
-//   res.render('pages/login');
-// });
+
+
+
 
 
 

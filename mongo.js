@@ -8,3 +8,5 @@ mongoose.connect(process.env.MONGOURI, {
 }).then(() => {
     console.log(`connection successfull`);
 }).catch((err) => console.log(err));
+
+module.exports = mongoose;
