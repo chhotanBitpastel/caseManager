@@ -122,12 +122,14 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
       await db1.collection('social_link').updateOne({name:"facebook"}, {$set: {link:req.body.f_link,priority: req.body.f_priority}});
       await db1.collection('social_link').updateOne({name:"instagram"}, {$set: {link:req.body.insta_link,priority: req.body.i_priority}});
       await db1.collection('social_link').updateOne({name:"linkedin"}, {$set: {link:req.body.l_link,priority: req.body.l_priority}});
-      await db1.collection('footer').updateOne({uid:"1"}, {$set: {footer_text:req.body.footerText}});
 
-      var fb_dtl= await db1.collection('social_link').findOne({name:"facebook"}); 
-      var insta_dtl= await db1.collection('social_link').findOne({name:"instagram"}); 
-      var lin_dtl= await db1.collection('social_link').findOne({name:"linkedin"}); 
-      var footer_text= await db1.collection('footer').findOne({uid:"1"}); 
+      await db1.collection('social_link').updateOne({name:"twitter"}, {$set: {link:req.body.t_link,priority: req.body.t_priority}});
+      await db1.collection('social_link').updateOne({name:"github"}, {$set: {link:req.body.g_link,priority: req.body.g_priority}});
+      await db1.collection('social_link').updateOne({name:"dribbble"}, {$set: {link:req.body.d_link,priority: req.body.d_priority}});
+      await db1.collection('social_link').updateOne({name:"behance"}, {$set: {link:req.body.b_link,priority: req.body.b_priority}});
+      
+      
+      await db1.collection('footer').updateOne({uid:"1"}, {$set: {footer_text:req.body.footerText}});
 
       //res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,msg:'Updated successfull.'}); 
       req.flash('message', 'Successfully updated');
@@ -147,10 +149,14 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
 
    var fb_dtl= await db.collection('social_link').findOne({name:"facebook"}); 
    var insta_dtl= await db.collection('social_link').findOne({name:"instagram"}); 
-   var lin_dtl= await db.collection('social_link').findOne({name:"linkedin"}); 
+   var lin_dtl= await db.collection('social_link').findOne({name:"linkedin"});
+   
+   var twit_dtl= await db.collection('social_link').findOne({name:"twitter"});
+   var git_dtl= await db.collection('social_link').findOne({name:"github"});
+   var dri_dtl= await db.collection('social_link').findOne({name:"dribbble"});
+   var beh_dtl= await db.collection('social_link').findOne({name:"behance"});
    var footer_text= await db.collection('footer').findOne({uid:"1"}); 
-
-    res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,message: req.flash('message')});
+    res.render('pages/footer', {twit_dtl:twit_dtl,git_dtl:git_dtl,dri_dtl:dri_dtl,beh_dtl:beh_dtl,fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,message: req.flash('message')});
 
     }catch (error){
       res.status(500);
