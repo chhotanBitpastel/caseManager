@@ -58,6 +58,12 @@
                     <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">All Post</li>
                 </ol>
+
+                <% if(message.length > 0){ %>
+                <div class="pull-left label label-success" style="margin-top: 2px; margin-left: 200px;font-size: 14px;">
+                    <%= message %>
+                </div>
+                <% } %>
             </section>
 
             <!-- Main content -->

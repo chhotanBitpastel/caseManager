@@ -41,7 +41,11 @@ label.error {
                     <li><a href="/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Footer Management</li>
                 </ol>
-               
+                <% if(message.length > 0){ %>
+                <div class="pull-left label label-success" style="margin-top: 2px; margin-left: 200px;font-size: 14px;">
+                    <%= message %>
+                </div>
+                <% } %>
             </section>
 
 
@@ -52,10 +56,7 @@ label.error {
                     <div class="box-header with-border">
                         <h3 class="box-title">Edit Footer</h3>
                     </div>
-                    <% if(msg != ''){ %>
-
-                        <p style="text-align: center"><%= msg %></p>
-                        <% } %>
+                    
                     <!-- form start -->
                     <form class="form-horizontal" action="/footer/"  method="post" >
                         <div class="box-body">

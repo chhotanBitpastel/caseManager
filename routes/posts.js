@@ -106,7 +106,7 @@ router.get("/", checkLoginUser, async (req, res) => {
     try{
         const posts = await Post.find({})
         //res.send(posts);
-        res.render('pages/allposts',{allposts:posts});
+        res.render('pages/allposts',{allposts:posts, message: req.flash('message')});
     } catch(error){
       res.status(500);
     }
@@ -129,6 +129,7 @@ router.post("/", upload.single('file'), async (req, res) => {
        // console.log(req.file);
         await post.save();
        // res.send(req.body);
+        req.flash('message', 'Post added successfully.');
         res.redirect('/posts')
     } catch (error) {
         res.status(500);
@@ -162,8 +163,8 @@ router.post("/edit/", upload.single('file'), function(req, res){
        if(err){
         res.redirect('/posts/'+req.body.id)
        }else{
-       res.redirect('/posts')
-       
+        req.flash('message', 'Post Updated successfully.');
+        res.redirect('/posts')
        }
     });  
     
@@ -178,6 +179,7 @@ router.get("/delete/:postId", async (req, res) => {
             const post = await Post.findByIdAndRemove({
                 _id: req.params.postId
             });
+            req.flash('message', 'Post Deleted successfully.');
             res.redirect('/posts')
         } catch (error) {
             res.status(500); 

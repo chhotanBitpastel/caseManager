@@ -8,6 +8,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 var sftpStorage = require('multer-sftp');
 var session = require('express-session');
+var flash = require('connect-flash');
+
 const app = express();
 
 const port = process.env.PORT || 3001;
@@ -46,8 +48,9 @@ app.use(bodyParser.json())
 app.use(session({
   secret: 'rwqrqqwrwq',
   resave: false,
-  saveUninitialized: true,
-}));  
+  saveUninitialized: false,
+})); 
+app.use(flash()); 
 //mobile api route
 app.use('/api', require('./api/posts'));
 

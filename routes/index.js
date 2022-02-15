@@ -129,9 +129,10 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
       var lin_dtl= await db1.collection('social_link').findOne({name:"linkedin"}); 
       var footer_text= await db1.collection('footer').findOne({uid:"1"}); 
 
-      res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,msg:'Updated successfull.'}); 
-      //res.redirect('/footer');
-      //res.render('pages/footer', {msg:"Updated successfull."});
+      //res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,msg:'Updated successfull.'}); 
+      req.flash('message', 'Updated successfull.');
+      res.redirect('/footer');
+      
 
       } catch (error) {
         res.status(500);
@@ -139,7 +140,7 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
     
 });
 
-  router.get("/footer", async (req, res, next) => {
+  router.get("/footer", checkLoginUser, async (req, res, next) => {
   
     try{
    const db = mongoose.connection.db;
@@ -149,7 +150,7 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
    var lin_dtl= await db.collection('social_link').findOne({name:"linkedin"}); 
    var footer_text= await db.collection('footer').findOne({uid:"1"}); 
 
-    res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,msg:''});
+    res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,message: req.flash('message')});
 
     }catch (error){
       res.status(500);
