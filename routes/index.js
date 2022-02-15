@@ -130,7 +130,7 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
       var footer_text= await db1.collection('footer').findOne({uid:"1"}); 
 
       //res.render('pages/footer', {fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,msg:'Updated successfull.'}); 
-      req.flash('message', 'Updated successfull.');
+      req.flash('message', 'Successfully updated');
       res.redirect('/footer');
       
 
