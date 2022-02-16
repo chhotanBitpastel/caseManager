@@ -63,6 +63,7 @@ router.get('/', function(req, res, next) {
     var token = jwt.sign({ userID: getUserID }, 'loginToken');//generate token
     localStorage.setItem('userToken', token); //store token
     //localStorage.setItem('loginUser', getFullname); // and store fullname also
+    req.session.adminId=getUserID;
     req.session.userName=getFullname;
 
     res.redirect('/dashboard');
@@ -162,15 +163,6 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
       res.status(500);
     }
 
-    // db.collection('social_link').find().toArray((err, result) => {
-    //   console.log(result)
-    // });
-    // var fb_dtl;
-    // var insta_dtl;
-    // var lin_dtl;
-    // var footer_text;
-    
-
     //   db.collection('social_link').findOne({name:"facebook"}, function(err, doc) {
     //   if(err) throw err;
     //   if (doc) {
@@ -179,36 +171,40 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
     //   }
     // })
 
-    // db.collection('social_link').findOne({name:"instagram"}, function(err, doc) {
-    //   if(err) throw err;
-    //   if (doc) {
-    //     insta_dtl=doc;
-    //    // console.log(insta_dtl);
-    //   }
-    // })
+});
 
-    // db.collection('social_link').findOne({name:"linkedin"}, function(err, doc) {
-    //   if(err) throw err;
-    //   if (doc) {
-    //     lin_dtl=doc;
-    //     //console.log(lin_dtl);
-    //   }
-    // })
+router.get("/change-password", (req, res, next) => {
+ // var loginUser= req.session.userName;
+  res.render('pages/change_password', {message: req.flash('message')});
+});
 
-    // db.collection('footer').findOne({uid:"1"}, function(err, doc) {
-    //   if(err) throw err;
-    //   if (doc) {
-    //     footer_text=doc;
-    //     //console.log(footer_text);
-    //   }
-    // })
+router.post('/change-password/', async function(req, res) {
 
-    // console.log(fb_dtl);
-    // console.log(insta_dtl);
-    // console.log(lin_dtl);
-    // console.log(footer_text);
+  var adminid= req.session.adminId;
+  
+  var admin_dtl= await userModule.findOne({_id:adminid});
+  //console.log(admin_dtl);
+  var prev_password=admin_dtl.password;
 
-  //res.render('pages/footer');
+  var old_password=req.body.old_password;
+  var new_password=req.body.new_password;
+
+ 
+   if(bcrypt.compareSync(old_password,prev_password)){
+   
+      password =bcrypt.hashSync(req.body.new_password,10);
+
+      userModule.findByIdAndUpdate(adminid, {password :password}, function(err){
+      if(err) throw err;
+    
+      req.flash('message', 'Password Updated successfully.');
+      res.redirect('/change-password');
+     });  
+     }else{
+      req.flash('message', 'Old password is wrong!');
+      res.redirect('/change-password');
+    }
+
 });
   
 
