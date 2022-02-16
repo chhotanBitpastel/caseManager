@@ -58,7 +58,7 @@ label.error {
                     </div>
                     
                     <!-- form start -->
-                    <form class="form-horizontal" action="/footer/"  method="post" >
+                    <form class="form-horizontal" action="/footer/" id="footerForm"  method="post" >
                         <div class="box-body">
                             
                 
@@ -67,7 +67,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Facebook : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="f_link" placeholder="Enter link" value="<%= fb_dtl.link %>" >
+                                    <input type="text" class="form-control" id="f_link" name="f_link" placeholder="Enter link" value="<%= fb_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -86,7 +86,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Instagram : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="insta_link" placeholder="Enter link" value="<%= insta_dtl.link %>" >
+                                    <input type="text" class="form-control" id="insta_link" name="insta_link" placeholder="Enter link" value="<%= insta_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -105,7 +105,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Linkedin : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="l_link" placeholder="Enter link" value="<%= lin_dtl.link %>" >
+                                    <input type="text" class="form-control" id="l_link" name="l_link" placeholder="Enter link" value="<%= lin_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -124,7 +124,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Twitter : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="t_link" placeholder="Enter link" value="<%= twit_dtl.link %>" >
+                                    <input type="text" class="form-control" id="t_link" name="t_link" placeholder="Enter link" value="<%= twit_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -143,7 +143,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Github : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="g_link" placeholder="Enter link" value="<%= git_dtl.link %>" >
+                                    <input type="text" class="form-control" id="g_link" name="g_link" placeholder="Enter link" value="<%= git_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -162,7 +162,7 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-3 control-label">Dribbble : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="d_link" placeholder="Enter link" value="<%= dri_dtl.link %>" >
+                                    <input type="text" class="form-control" id="d_link" name="d_link" placeholder="Enter link" value="<%= dri_dtl.link %>" >
                                 </div>
                             </div>
                             </div>
@@ -181,7 +181,7 @@ label.error {
                                 <div class="form-group">
                                     <label for="category_name" class="col-sm-3 control-label">Behance : </label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="b_link" placeholder="Enter link" value="<%= beh_dtl.link %>" >
+                                        <input type="text" class="form-control" id="b_link" name="b_link" placeholder="Enter link" value="<%= beh_dtl.link %>" >
                                     </div>
                                 </div>
                                 </div>
@@ -229,6 +229,68 @@ label.error {
     </div>
     <!-- ./wrapper -->
     <%- include('../template/footer'); %>
+
+    <style type="text/css">
+        .customerror{
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+    $("#footerForm").validate({
+                    errorElement: 'span',
+                errorClass: 'customerror',
+                rules: {
+                    
+                    f_link: {
+                        url: true
+                    },
+                    insta_link: {
+                        url: true
+                    },
+                    l_link: {
+                        url: true
+                    },
+                    t_link: {
+                        url: true
+                    },
+                    g_link: {
+                        url: true
+                    },
+                    d_link: {
+                        url: true
+                    },
+                    b_link: {
+                        url: true
+                    }
+                    
+                },
+                messages: {
+                
+                f_link: {
+                    url: "Please enter a valied Link"
+                },
+                insta_link: {
+                    url: "Please enter a valied Link"
+                    },
+                l_link: {
+                url: "Please enter a valied Link"
+                },    
+                t_link: {
+                url: "Please enter a valied Link"
+                },
+                g_link: {
+                url: "Please enter a valied Link"
+                },
+                d_link: {
+                url: "Please enter a valied Link"
+                },
+                b_link: {
+                url: "Please enter a valied Link"
+                }
+
+                }
+            });
+</script>
 </body>
 
 </html>

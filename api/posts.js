@@ -6,7 +6,7 @@ const Post = require("../model/Post");
 
 router.get("/all-posts", async (req, res) => {
     try{
-        const posts = await Post.find({},{'title':1,'content':1,'link':1,'image':1});
+        const posts = await Post.find({},{'title':1,'content':1,'link':1,'image':1}).sort({sequence: 1});
         //const posts = await Post.find({'write where condition'}, {_id :1, which field require})
         res.send(posts);
     } catch(error){

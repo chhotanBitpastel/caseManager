@@ -125,6 +125,7 @@ router.post("/", upload.single('file'), async (req, res) => {
         post.content = req.body.content;
         post.link = req.body.link;
         post.image = req.file.filename;
+        post.sequence = req.body.sequence;
         //post.image = req.file.path;
        // console.log(req.file);
         await post.save();
@@ -159,6 +160,7 @@ router.post("/edit/", upload.single('file'), function(req, res){
         content : req.body.content,
         link : req.body.link,
         image : filename,
+        sequence: req.body.sequence,
     }, function(err){
        if(err){
         res.redirect('/posts/'+req.body.id)

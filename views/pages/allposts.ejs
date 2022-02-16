@@ -89,7 +89,7 @@
                                 <table id="example2" class="table table-bordered table-striped" style="margin-top: 25px;">
                                     <thead>
                                         <tr>
-                                            
+                                            <th>Sequence</th>
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>Link</th>
@@ -100,7 +100,7 @@
                                     <tbody>
                                         <% allposts.forEach(function(post) { %>
                                             <tr>
-                                              
+                                              <td><%= post.sequence %> </td>
                                               <td><%= post.title %> </td>
                                               <td><%= post.content %></td>
                                               <td><%= post.link %></td>

@@ -12,6 +12,7 @@ const post_schema = mongoose.Schema({
     },
     link:String,
     image:String,
+    sequence:String,
 },{ versionKey: false })
 
 module.exports = mongoose.model("Post", post_schema);

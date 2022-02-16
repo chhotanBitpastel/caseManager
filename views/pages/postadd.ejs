@@ -53,7 +53,7 @@ label.error {
                         <h3 class="box-title">Add Post</h3>
                     </div>
                     <!-- form start -->
-                    <form class="form-horizontal"  method="POST" action="/posts" enctype="multipart/form-data">
+                    <form class="form-horizontal"  method="POST" action="/posts" id="postform" enctype="multipart/form-data">
                         <div class="box-body">
                             
                             <div class="form-group">
@@ -73,8 +73,15 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-2 control-label">Link: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="link"
-                                        placeholder="Enter Link" required>      
+                                    <input type="text" class="form-control" id="link" name="link"
+                                        placeholder="Enter Link">      
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category_name" class="col-sm-2 control-label">Sequence: </label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="sequence"
+                                        placeholder="Enter Sequence" required>      
                                 </div>
                             </div>
                             <div class="form-group">
@@ -106,6 +113,34 @@ label.error {
     </div>
     <!-- ./wrapper -->
     <%- include('../template/footer'); %>
+    <style type="text/css">
+        .customerror{
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+    $("#postform").validate({
+                    errorElement: 'span',
+                errorClass: 'customerror',
+                rules: {
+                    
+                    link: {
+                        required: true,
+                        url: true
+                    }
+                    
+                },
+                messages: {
+                
+                link: {
+                    required: "Please enter a Link",
+                    url: "Please enter a valied Link"
+                }
+                
+                }
+            });
+</script>
+
 </body>
 
 </html>

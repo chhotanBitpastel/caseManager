@@ -53,7 +53,7 @@ label.error {
                         <h3 class="box-title">Edit Post</h3>
                     </div>
                     <!-- form start -->
-                    <form class="form-horizontal" action="/posts/edit/"  method="post"  enctype="multipart/form-data">
+                    <form class="form-horizontal" action="/posts/edit/"  method="post" id="postform"  enctype="multipart/form-data">
                         <div class="box-body">
                             <input type="hidden" name="id" value="<%= singlepost._id %>">
                             <input type="hidden" name="oldfile" value="<%= singlepost.image %>">
@@ -74,10 +74,19 @@ label.error {
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-2 control-label">Link: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="link"
+                                    <input type="text" class="form-control" id="link" name="link"
                                         placeholder="Enter Link" value="<%= singlepost.link %>" required>      
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="category_name" class="col-sm-2 control-label">Sequence: </label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="sequence"
+                                        placeholder="Enter Sequence" value="<%= singlepost.sequence %>" required>      
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="category_name" class="col-sm-2 control-label">Image: </label>
                                 <div class="col-sm-6">
@@ -113,6 +122,35 @@ label.error {
     </div>
     <!-- ./wrapper -->
     <%- include('../template/footer'); %>
+
+    <style type="text/css">
+        .customerror{
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+    $("#postform").validate({
+                    errorElement: 'span',
+                errorClass: 'customerror',
+                rules: {
+                    
+                    link: {
+                        required: true,
+                        url: true
+                    }
+                    
+                },
+                messages: {
+                
+                link: {
+                    required: "Please enter a Link",
+                    url: "Please enter a valied Link"
+                }
+                
+                }
+            });
+</script>
+
 </body>
 
 </html>
