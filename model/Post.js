@@ -12,7 +12,7 @@ const post_schema = mongoose.Schema({
     },
     link:String,
     image:String,
-    sequence:String,
+    sequence:Number,
 },{ versionKey: false })
 
 module.exports = mongoose.model("Post", post_schema);
