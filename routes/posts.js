@@ -106,7 +106,7 @@ router.get("/", checkLoginUser, async (req, res) => {
     try{
         const posts = await Post.find({})
         //res.send(posts);
-        res.render('pages/allposts',{allposts:posts, message: req.flash('message')});
+        res.render('pages/allposts',{menu:'posts',allposts:posts, message: req.flash('message')});
     } catch(error){
       res.status(500);
     }
@@ -114,7 +114,7 @@ router.get("/", checkLoginUser, async (req, res) => {
 
 //view page
 router.get("/addpost", async (req, res) => {
-    res.render('pages/postadd');
+    res.render('pages/postadd', {menu:'posts'});
 });
 
 //Add data
@@ -142,7 +142,7 @@ router.post("/", upload.single('file'), async (req, res) => {
 router.get("/:postId", async (req, res) => {
     try {
         const singlepost = await Post.findOne({_id: req.params.postId})
-        res.render("pages/postedit", {singlepost:singlepost})
+        res.render("pages/postedit", {menu:'posts',singlepost:singlepost})
     } catch (error) {
         res.status(500);
     }

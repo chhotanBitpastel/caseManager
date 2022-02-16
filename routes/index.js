@@ -111,8 +111,8 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/dashboard", checkLoginUser, (req, res, next) => {
-    var loginUser= req.session.userName;
-    res.render('pages/dashboard', {loginUser:loginUser});
+    
+    res.render('pages/dashboard', {menu:'dashboard'});
   });
 
   router.post("/footer/", async (req, res) => {
@@ -157,7 +157,7 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
    var dri_dtl= await db.collection('social_link').findOne({name:"dribbble"});
    var beh_dtl= await db.collection('social_link').findOne({name:"behance"});
    var footer_text= await db.collection('footer').findOne({uid:"1"}); 
-    res.render('pages/footer', {twit_dtl:twit_dtl,git_dtl:git_dtl,dri_dtl:dri_dtl,beh_dtl:beh_dtl,fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,message: req.flash('message')});
+    res.render('pages/footer', {twit_dtl:twit_dtl,git_dtl:git_dtl,dri_dtl:dri_dtl,beh_dtl:beh_dtl,fb_dtl:fb_dtl,insta_dtl:insta_dtl,lin_dtl:lin_dtl,footer_text:footer_text,menu:'footer',message: req.flash('message')});
 
     }catch (error){
       res.status(500);
@@ -175,7 +175,7 @@ router.get("/dashboard", checkLoginUser, (req, res, next) => {
 
 router.get("/change-password", (req, res, next) => {
  // var loginUser= req.session.userName;
-  res.render('pages/change_password', {message: req.flash('message')});
+  res.render('pages/change_password', {menu:'dashboard',message: req.flash('message')});
 });
 
 router.post('/change-password/', async function(req, res) {
